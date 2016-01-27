@@ -1,5 +1,5 @@
 ###########################################################################
-#                            TextMate Snippets                            #
+#                            TextMate Snippets (modified)                 #
 ###########################################################################
 
 priority -50
@@ -94,6 +94,44 @@ endsnippet
 
 snippet fund "function declaration" b
 ${1:void} ${2:function_name}(${3});
+endsnippet
+
+###########################################################################
+#                            My snippets                                  #
+###########################################################################
+
+snippet info "file information comment"
+// ----------------------------------------------------------------------------
+// File: ${1:`!p snip.rv = snip.fn`}
+// Author: ${2:Jan Czarnowski <czarnowski.jan@gmail.com>}
+// Date: ${3:`date +%d-%m-%Y`}
+// Desc: ${4}
+// ----------------------------------------------------------------------------
+$0
+endsnippet
+
+snippet gameh "header template"
+#ifndef ${1:`!p
+snip.rv = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()`}
+#define $1
+
+namespace ${2:game} {
+
+${VISUAL}${0}
+
+} // namespace $2
+
+#endif // $1
+endsnippet
+
+snippet gamec "source file template"
+#include "${1:`!p snip.rv = re.sub('\.cc$','.h',snip.fn)`}"
+
+namespace ${2:game} {
+
+${0}
+
+} // namespace $2
 endsnippet
 
 # vim:ft=snippets:

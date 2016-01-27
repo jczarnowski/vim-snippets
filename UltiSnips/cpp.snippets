@@ -13,13 +13,14 @@ ${1:v}${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}begin(), $1${1/^.*?(-)?(>)?$/(?2::(?1:>:
 endsnippet
 
 snippet cl "class .. (class)"
-class ${1:`!p snip.rv = snip.basename or "name"`}
-{
-public:
-	${1/(\w+).*/$1/} (${2:arguments});
-	virtual ~${1/(\w+).*/$1/} ();
+class ${1:`!p
+name = snip.basename.title()
+snip.rv = re.sub('[_]','', name)`} {
+ public:
+	$1(${2:});
+	virtual ~$1();
 
-private:
+ private:
 	${0:/* data */}
 };
 endsnippet
@@ -52,6 +53,14 @@ endsnippet
 
 snippet tp "template <typename ..> (template)"
 template <typename ${1:_InputIter}>
+endsnippet
+
+snippet mfun "member function implementation"
+${4:void} ${1:`!p 
+name = snip.basename.title()
+snip.rv = re.sub('[_]','', name)`}::${2:Function}(${3:args}) {
+	${VISUAL}${0}
+}
 endsnippet
 
 # vim:ft=snippets:
